@@ -5,6 +5,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 // ----- Required Routes ----- //
 const cohorts = require('./routes/cohorts');
@@ -24,6 +25,10 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(cors({
+  credentials: true,
+  origin: ['http://localhost:4200']
+}));
 
 // ----- Routes ----- //
 app.use('/cohorts', cohorts);
